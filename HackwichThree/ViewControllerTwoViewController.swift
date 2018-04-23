@@ -8,9 +8,13 @@
 
 import UIKit
 
-class ViewControllerTwoViewController: UIViewController {
+class ViewControllerTwoViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+    
+    var bucketListArray = ["finish class", "register cm400", "become programmer", "make an app", "teach beginners", ]
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,8 +25,23 @@ class ViewControllerTwoViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return bucketListArray.count
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //set table view cell identifer to:cellReuseIdentifier in storyboard by selecting the table view cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellReuseIdentifier")
+        
+        let text = bucketListArray[indexPath.row]
+        
+        cell?.textLabel?.text = text
+        return cell!
+    }
+    
     /*
     // MARK: - Navigation
 
